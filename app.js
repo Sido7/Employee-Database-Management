@@ -5,12 +5,14 @@ var fs = require('fs')
 var path = require('path')
 var dotenv = require('dotenv')
 var mongoose = require('mongoose')
+var bodyparser = require('body-parser')
 var employeeRoutes = require('./routes/employe.js')
 
 dotenv.config({path: path.join(__dirname,'config.env')})
 app.set('views',path.join(__dirname,'views'))
 app.set('view engine','ejs')
 app.use(express.static(__dirname + '/public'))
+app.use(bodyparser.urlencoded({extended:true}))
 
 app.use(employeeRoutes)
 mongoose.connect(process.env.Database_locale,{
